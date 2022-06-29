@@ -8,7 +8,7 @@ class HomeApp extends StatefulWidget {
 }
 
 class _HomeAppState extends State<HomeApp> {
-  List<String> chatNames = ["Ali", "Bilal"];
+  List<String> chatNames = [];
 
   TextEditingController nameInput = TextEditingController();
 
@@ -21,25 +21,43 @@ class _HomeAppState extends State<HomeApp> {
     print(chatNames);
   }
 
-  AlertDialog() {}
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.black,
         body: Column(
           children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.7,
-              child: TextField(
-                controller: nameInput,
+            Container(
+              width: MediaQuery.of(context).size.width * 1.9,
+              color: Colors.black,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 70.0, right: 70.0),
+                child: Column(
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          fillColor: const Color.fromARGB(255, 47, 46, 46),
+                          filled: true),
+                      style: const TextStyle(
+                          color: Color.fromARGB(255, 255, 255, 255)),
+                      controller: nameInput,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        addChat();
+                      },
+                      child: const Text('Add'),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                addChat();
-              },
-              child: const Text('Add'),
             ),
             const SizedBox(
               height: 20,
@@ -60,4 +78,31 @@ class _HomeAppState extends State<HomeApp> {
       ),
     );
   }
+}
+
+showAlertDialog(BuildContext context) {
+  // Create button
+  Widget okButton = TextButton(
+    child: const Text("OK"),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+
+  // Create AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: const Text("Notice!"),
+    content: const Text("Are you sure Delete this "),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
