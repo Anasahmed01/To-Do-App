@@ -40,17 +40,15 @@ class _HomeAppState extends State<HomeApp> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           ),
-                          fillColor: const Color.fromARGB(255, 47, 46, 46),
+                          fillColor: const Color(0xFF343645),
                           filled: true),
                       style: const TextStyle(
                           color: Color.fromARGB(255, 255, 255, 255)),
                       controller: nameInput,
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        addChat();
-                      },
-                      child: const Text('Add'),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12.0),
+                      child: balanceSlideElevatedbutton(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -104,5 +102,29 @@ showAlertDialog(BuildContext context) {
     builder: (BuildContext context) {
       return alert;
     },
+  );
+}
+
+Widget balanceSlideElevatedbutton() {
+  return SizedBox(
+    height: 60,
+    width: 100,
+    child: ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(
+          const Color(0xFF343645),
+        ),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(40.0),
+          ),
+        ),
+      ),
+      onPressed: () {},
+      child: const Text(
+        'Add',
+        style: TextStyle(fontSize: 20),
+      ),
+    ),
   );
 }
