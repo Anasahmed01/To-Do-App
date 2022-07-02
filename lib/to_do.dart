@@ -48,7 +48,30 @@ class _HomeAppState extends State<HomeApp> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 12.0),
-                      child: balanceSlideElevatedbutton(),
+                      child: SizedBox(
+                        height: 60,
+                        width: 100,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                              const Color(0xFF343645),
+                            ),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40.0),
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            addChat();
+                          },
+                          child: const Text(
+                            'Add',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -62,11 +85,17 @@ class _HomeAppState extends State<HomeApp> {
             ),
             Expanded(
               child: ListView.builder(
+                padding: const EdgeInsets.all(10),
                 itemCount: chatNames.length,
                 itemBuilder: (context, index) {
                   return ListTile(
                     tileColor: Colors.grey,
                     title: Text(chatNames[index]),
+                    onTap: () {
+                      setState(() {
+                        chatNames.removeAt(index);
+                      });
+                    },
                   );
                 },
               ),
