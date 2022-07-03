@@ -92,6 +92,7 @@ class _HomeAppState extends State<HomeApp> {
                     tileColor: Colors.grey,
                     title: Text(chatNames[index]),
                     onTap: () {
+                      showAlertDialog(context);
                       setState(() {
                         chatNames.removeAt(index);
                       });
@@ -118,7 +119,7 @@ showAlertDialog(BuildContext context) {
 
   // Create AlertDialog
   AlertDialog alert = AlertDialog(
-    title: const Text("Notice!"),
+    title: const Text("Alert!"),
     content: const Text("Are you sure Delete this "),
     actions: [
       okButton,
