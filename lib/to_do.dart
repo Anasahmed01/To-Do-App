@@ -88,15 +88,37 @@ class _HomeAppState extends State<HomeApp> {
                 padding: const EdgeInsets.all(10),
                 itemCount: chatNames.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    tileColor: Colors.grey,
-                    title: Text(chatNames[index]),
-                    onTap: () {
-                      showAlertDialog(context);
-                      setState(() {
-                        chatNames.removeAt(index);
-                      });
-                    },
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 5, bottom: 5),
+                    child: ListTile(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25),
+                          topRight: Radius.circular(25),
+                          bottomRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                        ),
+                      ),
+                      tileColor: Colors.grey,
+                      title: Text(chatNames[index]),
+                      trailing: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            chatNames.removeAt(index);
+                            showAlertDialog(context);
+                          });
+                        },
+                        icon: const Icon(Icons.delete),
+                      ),
+
+// this methot is worked but not be a professionalaty....
+                      // onTap: () {
+                      //   showAlertDialog(context);
+                      //   setState(() {
+                      //     chatNames.removeAt(index);
+                      //   });
+                      // },
+                    ),
                   );
                 },
               ),
@@ -116,6 +138,12 @@ showAlertDialog(BuildContext context) {
       Navigator.of(context).pop();
     },
   );
+  Widget cancleButton = TextButton(
+    child: const Text("Cancel"),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
 
   // Create AlertDialog
   AlertDialog alert = AlertDialog(
@@ -123,6 +151,7 @@ showAlertDialog(BuildContext context) {
     content: const Text("Are you sure Delete this "),
     actions: [
       okButton,
+      cancleButton,
     ],
   );
 
