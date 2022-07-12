@@ -104,8 +104,10 @@ class _HomeAppState extends State<HomeApp> {
                       trailing: IconButton(
                         onPressed: () {
                           setState(() {
-                            chatNames.removeAt(index);
-                            showAlertDialog(context);
+                            showAlertDialog(
+                              context,
+                              chatNames.removeAt(index),
+                            );
                           });
                         },
                         icon: const Icon(Icons.delete),
@@ -130,11 +132,15 @@ class _HomeAppState extends State<HomeApp> {
   }
 }
 
-showAlertDialog(BuildContext context) {
+showAlertDialog(
+  BuildContext context,
+  removeFunction,
+) {
   // Create button
   Widget okButton = TextButton(
     child: const Text("OK"),
     onPressed: () {
+      removeFunction;
       Navigator.of(context).pop();
     },
   );
